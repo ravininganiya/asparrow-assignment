@@ -10,7 +10,6 @@ const AddEducation = ({ setNewEducationModal, studentData }) => {
   const [collegeName, setCollegeName] = useState("");
   const [courseName, setCourseName] = useState("");
   const [sessionTime, setSessionTime] = useState("");
-  // const [accomplishment, setAccomplishment] =useState('')
 
   const onCollegeNameChange = (e) => {
     if (

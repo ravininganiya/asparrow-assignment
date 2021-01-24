@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route, Router, Switch } from 'react-router'
 import Home from './Home/Home'
-import StudentDetail from './Home/StudentDetail'
 import history from '../history'
 import 'antd/dist/antd.css';
 import './assests/style.css'
@@ -12,8 +11,8 @@ const App = () => {
     <>
       <Router history={history}>
         <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/student-detail" component={StudentDetail} exact />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/asparrow-assignment" component={Home}  />
         </Switch>
       </Router>
     </>
