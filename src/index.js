@@ -1,17 +1,26 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from 'react-dom'
+import App from './components/App'
+import {createStore} from 'redux'
+import { Provider } from 'react-redux';
+import rootReducer from './reducers'
+import { loadState, saveState } from "./localStorage";
+import throttle from "lodash/throttle";
+import { devToolsEnhancer } from 'redux-devtools-extension';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const persistedState = loadState();
+const store = createStore(rootReducer, devToolsEnhancer(persistedState));
+store.subscribe(
+  throttle(() => {
+    saveState({
+      student: store.getState().student
+    });
+  }, 1000)
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+    ,document.getElementById('root')
+)
